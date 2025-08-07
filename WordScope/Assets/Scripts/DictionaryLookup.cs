@@ -49,6 +49,8 @@ public class DictionaryLookup : MonoBehaviour
                         Debug.Log($"<b>{word.FirstCharacterToUpper()}</b>: {definition}");
                     }
 
+                    // To print all JSON values
+                    //JsonUtils.PrintAllJsonValues(req.downloadHandler.text);
                     break;
                 }
 

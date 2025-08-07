@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using static DictionaryModels;
 
@@ -30,5 +29,36 @@ public static class JsonUtils
 
         // Null checks for root & its items.
         return root?.items?[0]?.meanings?[0]?.definitions?[0]?.definition;
+    }
+
+    public static void PrintAllJsonValues(string json)
+    {
+        var token = JToken.Parse(json);
+        PrintTokenRecursive(token);
+    }
+
+    private static void PrintTokenRecursive(JToken token)
+    {
+        switch (token.Type)
+        {
+            case JTokenType.Object:
+                foreach (var prop in (JObject)token)
+                {
+                    Debug.Log($"{prop.Key}:");
+                    PrintTokenRecursive(prop.Value);
+                }
+                break;
+
+            case JTokenType.Array:
+                foreach (var item in (JArray)token)
+                {
+                    PrintTokenRecursive(item);
+                }
+                break;
+
+            default:
+                Debug.Log($"{token}");
+                break;
+        }
     }
 }
