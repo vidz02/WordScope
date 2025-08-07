@@ -57,8 +57,11 @@ public class DictionaryLookup : MonoBehaviour
                 break;
 
             case UnityWebRequest.Result.ConnectionError:
+                Debug.LogError($"Connection error: {req.error}");
+                break;
+
             case UnityWebRequest.Result.ProtocolError:
-                Debug.LogError($"Network error: {req.error}");
+                Debug.LogError($"Protocol error: {req.error}");
                 break;
 
             case UnityWebRequest.Result.DataProcessingError:
